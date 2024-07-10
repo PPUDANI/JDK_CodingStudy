@@ -65,8 +65,5 @@ int solution(int number, int limit, int power) {
     return answer;
 }
 
-int main()
-{
-    int res1 = solution(5, 3, 2);
-    int res2 = solution(10, 3, 2);
-}
+// 5, 3, 2
+// 10, 3, 2

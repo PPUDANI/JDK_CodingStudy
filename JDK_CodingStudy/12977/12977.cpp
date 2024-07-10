@@ -35,9 +35,3 @@ int solution(std::vector<int> nums)
 
     return answer;
 }
-
-int main()
-{
-    int res = solution(std::vector<int>({ 1, 2, 7, 6, 4 }));
-    std::cout << res << std::endl;
-}
