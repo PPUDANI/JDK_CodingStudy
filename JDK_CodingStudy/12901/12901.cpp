@@ -17,10 +17,14 @@ using namespace std;
 
 string solution(int a, int b) 
 {
-	std::vector<int> SumMonthError = { 0, 1, 0, 1, 1, 2, 2, 3, 4, 4, 5, 5 };
+	// 누적 오차
+	std::vector<int> SumMonthError = { 0, 1, 0, 1, 1, 2, 2, 3, 4, 4, 5, 5 }; 
 
-	int NumberOfDays = --a * 30 + SumMonthError[a] + b; // (달 수 - 1) * 30 + (달 수 - 1)의 오차값 + 일 수
-	int CurDay = NumberOfDays % 7; // 일주일로 나눈 나머지를 구함.
+	// (달 수 - 1) * 30 + (달 수 - 1)의 오차값 + 일 수
+	int NumberOfDays = --a * 30 + SumMonthError[a] + b; 
+
+	// 일주일로 나눈 나머지를 구함.
+	int CurDay = NumberOfDays % 7; 
 
 	switch (CurDay) 	// 1월 1일이 금요일인 기준으로 작성
 	{
