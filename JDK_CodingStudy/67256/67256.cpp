@@ -11,7 +11,7 @@ enum class EHAND
     NONE
 };
 
-// 벡터 구하듯이 계산하려다 매번 계산하는게 불편해서 무식하게 만들었음
+// 벡터 구하듯이 계산하려다 매번 계산하는게 불편해서 메모리 씀
 // 'Center'값 부터 'Index'까지의 거리 저장
 static std::unordered_map<int, std::vector<int>> DistanceFromCenter =
 {   
@@ -81,10 +81,4 @@ string solution(vector<int> numbers, string hand)
     }
 
     return answer;
-}
-
-
-int main()
-{
-    std::string res = solution({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 }, "right");
 }
