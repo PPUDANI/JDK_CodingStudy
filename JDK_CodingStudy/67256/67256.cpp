@@ -37,6 +37,7 @@ string solution(vector<int> numbers, string hand)
 
     for (int Num : numbers)
     {
+        // Num을 받아 왼손 오른손 체크
         switch (Num)
         {
         case 1: case 4: case 7:
@@ -65,6 +66,7 @@ string solution(vector<int> numbers, string hand)
             break;
         }
 
+        // 현재 움직인 손의 위치 저장 및 반환값에 추가
         switch (CurMovedHand)
         {
         case EHAND::LEFT:

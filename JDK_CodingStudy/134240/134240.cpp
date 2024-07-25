@@ -8,10 +8,10 @@ string solution(vector<int> food)
 
     int NumberOfFoodTypes = static_cast<int>(food.size());
 
-    // Food 별 string 저장할 컨테이너
+    // 음식 별 문자열을 저장할 컨테이너
     std::vector<std::string> Foods(NumberOfFoodTypes, "");
 
-    // 순회하며 Food string을 만들고 answer에 추가
+    // 순회하며 음식마다의 문자열을 만들고 answer에 추가
     for (int i = 0; i < NumberOfFoodTypes; ++i)
     {
         int NumberOfFood = food[i] / 2;
@@ -22,7 +22,7 @@ string solution(vector<int> food)
     // 0 추가
     answer += '0';
 
-    // 역순으로 answer에 추가
+    // Foods를 역순으로 돌아 answer에 추가
     for (int i = NumberOfFoodTypes - 1; i >= 0; --i)
     {
         answer += Foods[i];
@@ -31,31 +31,6 @@ string solution(vector<int> food)
     return answer;
 }
 
-/*
-string solution(vector<int> food)
-{
-    std::string answer = "";
-
-    int NumberOfFoodTypes = static_cast<int>(food.size());
-    std::vector<std::string> Foods(NumberOfFoodTypes, "");
-
-    for (int i = 0; i < NumberOfFoodTypes; ++i)
-    {
-        int NumberOfFood = food[i] / 2;
-        Foods[i].assign(NumberOfFood, i + '0');
-        answer += Foods[i];
-    }
-
-    answer += '0';
-
-    for (int i = answer.size() - 2; i >= 0; --i)
-    {
-        answer += answer[i];
-    }
-
-    return answer;
-}
-*/
 int main()
 {
     string res = solution({ 1, 3, 4, 6, 2, 4, 6, 7, 0});
