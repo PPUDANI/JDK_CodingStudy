@@ -7,7 +7,7 @@
 //#include <12977\12977.cpp>
 //#include <131128\131128.cpp>
 //#include <155652\155652.cpp>
-#include <178871\178871.cpp>
+//#include <72410\72410.cpp>
 
 
 template <typename Func, typename... Args>
@@ -34,11 +34,7 @@ auto measureTime(Func&& func, Args&&... args) {
 
 int main()
 {
-    auto res1 = measureTime(solution, std::vector<std::string>{ "mumu", "soe", "poe", "kai", "mine" }, std::vector<std::string>{ "kai", "kai", "mine", "mine" });
-    
-    for (std::string i : res1)
-    {
-        std::cout << i << " ";
-    }
-    
+    auto res1 = measureTime(solution1, "ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@");
+   
+    std::cout << res1 << "\n" << res2 << std::endl;
 }
