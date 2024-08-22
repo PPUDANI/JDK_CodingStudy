@@ -80,10 +80,14 @@ vector<int> solution(vector<string> park, vector<string> routes)
             break;
         }
 
-        // 이동 여부 체크
-        bool IsMovable = true;
+        // 검사 기준 위치
         Coordinate MoveIndex = CurRobotIndex;
+
+        // 이동 횟수
         int Distance = static_cast<int>(routes[i][2] - '0');
+
+        // 이동 횟수 만큼 loop돌며 정해진 규칙을 통해 이동 가능 여부를 체크함.
+        bool IsMovable = true;
         for (int j = 0; j < Distance; ++j)
         {
             MoveIndex += Direction;
@@ -100,7 +104,7 @@ vector<int> solution(vector<string> park, vector<string> routes)
             }
         }
 
-        // 이동이 가능하면 위치 수정
+        // 이동이 가능하면 현재 위치를 움직인 위치로 초기화
         if (IsMovable == true)
         {
             CurRobotIndex = MoveIndex;

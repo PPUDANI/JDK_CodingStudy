@@ -15,12 +15,15 @@ int GetDataIndex(const char _ext)
 {
     switch (_ext)
     {
-    case 'c': return  0;
-    case 'd': return  1;
-    case 'm': return  2;
-    case 'r': return  3;
-
-    default: 
+    case 'c': 
+        return 0;
+    case 'd': 
+        return 1;
+    case 'm': 
+        return 2;
+    case 'r': 
+        return 3;
+    default : 
         return -1;
     }
 }
@@ -30,16 +33,16 @@ std::vector<std::vector<int>> solution(std::vector<std::vector<int>> data, std::
     std::vector<std::vector<int>> answer;
     answer.reserve(data.size());
 
-    // ext와 sort_by를 index로 받아옴
+    // ext와 sort_by를 GetDataIndex()함수를 통해 index로 받아옴
     int CheckDataIndex = GetDataIndex(ext[0]);
     SortDataIndex = GetDataIndex(sort_by[0]);
 
     for (std::vector<int> Data : data)
     {
-        // 받아온 index로 데이터 선별
+        // 받아온 CheckDataindex로 데이터를 선별.
         if (Data[CheckDataIndex] < val_ext)
         {
-            answer.push_back(std::vector<int>{ Data[0], Data[1], Data[2], Data[3] });
+            answer.push_back(Data);
         }
     }
 
