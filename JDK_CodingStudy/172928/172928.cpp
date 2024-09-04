@@ -7,13 +7,7 @@ using namespace std;
 class Coordinate
 {
 public:
-    Coordinate() 
-    {
-        X = 0;
-        Y = 0;
-    };
-
-    Coordinate(int _X, int _Y) : X(_X), Y(_Y)
+    Coordinate(int _X = 0, int _Y = 0) : X(_X), Y(_Y)
     { 
 
     }

@@ -89,6 +89,7 @@ string solution(vector<string> survey, vector<int> choices)
     for (int i = 0; i < QnANum; ++i)
     {
         // 대칭인 점수를 만들기 위해 -4를 해줌.
+
         // -3 | -2 | -1 |  0 |  1 |  2 |  3
         int Score = choices[i] - 4; 
 

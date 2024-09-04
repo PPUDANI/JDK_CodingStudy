@@ -5,7 +5,7 @@
 int SortDataIndex = -1;
 
 // sort_by 기준으로 정렬
-bool compare(std::vector<int>& Left, std::vector<int>& Right)
+bool compare(const std::vector<int>& Left, const std::vector<int>& Right)
 {
     return Left[SortDataIndex] < Right[SortDataIndex];
 }
@@ -37,7 +37,7 @@ std::vector<std::vector<int>> solution(std::vector<std::vector<int>> data, std::
     int CheckDataIndex = GetDataIndex(ext[0]);
     SortDataIndex = GetDataIndex(sort_by[0]);
 
-    for (std::vector<int> Data : data)
+    for (std::vector<int>& Data : data)
     {
         // 받아온 CheckDataindex로 데이터를 선별.
         if (Data[CheckDataIndex] < val_ext)
