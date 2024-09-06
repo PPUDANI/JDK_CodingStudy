@@ -37,7 +37,7 @@ public:
         return Count;
     }
 
-    // 이번달 선물 지수
+    // 선물 지수 반환
     int GetGiftPoint()
     {
         int Point = static_cast<int>(GiveFriends.size() - NumOfReceived);
@@ -45,9 +45,7 @@ public:
     }
 
 private:
-    // 내가 선물을 준 사람만 기억하면 됨.
-    // Give는 multiset을 사용.
-    // 받는 횟수는 int를 사용.
+    // 서로의 선물 횟수를 가리기 위해 Give는 multiset 사용.
     unordered_multiset<string> GiveFriends;
     int NumOfReceived;
 };
@@ -87,18 +85,20 @@ int solution(vector<string> friends, vector<string> gifts)
         {
             const string& RightName = friends[Right];
 
+            // 서로의 선물 횟수
             int NumOfLeftGift = FriendMap[LeftName].GetCountOfGaveToFriend(RightName);
             int NumOfRightGift = FriendMap[RightName].GetCountOfGaveToFriend(LeftName);
 
-            if (NumOfLeftGift > NumOfRightGift)
+           
+            if (NumOfLeftGift > NumOfRightGift)  // Left가 큰 경우
             {
                 ++NextMonthGift[Left];
             }
-            else if (NumOfLeftGift < NumOfRightGift)
+            else if (NumOfLeftGift < NumOfRightGift)  // Right가 큰 경우
             {
                 ++NextMonthGift[Right];
             }
-            else 
+            else // 같을 경우 선물 지수를 이용함.
             {
                 int LeftPoint = FriendMap[LeftName].GetGiftPoint();
                 int RightPoint = FriendMap[RightName].GetGiftPoint();

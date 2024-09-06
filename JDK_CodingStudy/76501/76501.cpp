@@ -7,6 +7,8 @@ int solution(vector<int> absolutes, vector<bool> signs)
 {
     int answer = 0;
     int AbsNum = static_cast<int>(absolutes.size());
+
+    // sign을 비교하여 더해주거나 빼줌.
     for (int i = 0; i < AbsNum; ++i)
     {
         answer += signs[i] == true ? absolutes[i] : -absolutes[i];
