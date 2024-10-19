@@ -46,11 +46,11 @@ public:
         {
             if (Iron == _Value.Iron)
             {
-                return Diamond > _Value.Diamond;
+                return Diamond < _Value.Diamond;
             }
-            return Iron > _Value.Iron;
+            return Iron < _Value.Iron;
         }
-        return Stone > _Value.Stone;
+        return Stone < _Value.Stone;
     }
 };
 
@@ -94,34 +94,19 @@ int solution(vector<int> picks, vector<string> minerals)
         CostOfSets.push(EndSetCost);
     }
 
-    // 성능 좋은 곡괭이로 캐기위해 필요없는 곡괭이 버리기 
-    MineralCost UsePickax = MineralCost();
-    int SetSize = static_cast<int>(CostOfSets.size());
-    for (int i = 0; i < 3; ++i)
-    {
-        if (picks[i] <= SetSize)
-        {
-            SetSize -= picks[i];
-            UsePickax.Mineral[i] += picks[i];
-        }
-        else
-        {
-            UsePickax.Mineral[i] += SetSize;
-            break;
-        }
-    }
-
     // 정렬된 집합을 효율이 낮은 순으로 피로도가 적게 사용되는 값을 구해 (이미 priority_queue로 정럴됨)
-    // 피로도의 합을 구함.
     int answer = 0;
-    for (int i = 2; i >= 0; --i)
+    int CurPickaxIndex = 0;
+    while (!CostOfSets.empty())
     {
-        while (UsePickax.Mineral[i] > 0)
+        while (picks[CurPickaxIndex] == 0)
         {
-            answer += CostOfSets.top().Mineral[i];
-            CostOfSets.pop();
-            --UsePickax.Mineral[i];
+            ++CurPickaxIndex;
         }
+
+        answer += CostOfSets.top().Mineral[CurPickaxIndex];
+        CostOfSets.pop();
+        --picks[CurPickaxIndex];
     }
 
     return answer;
