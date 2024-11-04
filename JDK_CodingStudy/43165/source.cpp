@@ -8,31 +8,28 @@ int solution_BFS(vector<int> numbers, int target)
     int answer = 0;
     int ArrSize = int(numbers.size());
 
-    //         idx  sum
     queue<pair<int, int>> BFS_Q;
-
+    //         Index   Stack
     BFS_Q.push({ 0, numbers[0] });
     BFS_Q.push({ 0, -numbers[0] });
 
     while (!BFS_Q.empty())
     {
-        int CurIndex = BFS_Q.front().first;
+        int NextIndex = BFS_Q.front().first + 1;
         int CurSum = BFS_Q.front().second;
-
         BFS_Q.pop();
 
-        if (ArrSize == ++CurIndex)
+        if (NextIndex == ArrSize)
         {
             if (CurSum == target)
             {
                 ++answer;
-                continue;
             }
         }
         else
         {
-            BFS_Q.push({ CurIndex, CurSum + numbers[CurIndex] });
-            BFS_Q.push({ CurIndex, CurSum - numbers[CurIndex] });
+            BFS_Q.push({ NextIndex, CurSum + numbers[NextIndex] });
+            BFS_Q.push({ NextIndex, CurSum - numbers[NextIndex] });
         }
     }
 
@@ -47,7 +44,7 @@ int solution_DFS(vector<int> numbers, int target)
 
     stack<pair<int, int>, vector<pair<int, int>>> DFS_Stack;
 
-    //            Index Stack
+    //             Index   Stack
     DFS_Stack.push({ 0, numbers[0]});
     DFS_Stack.push({ 0, -numbers[0] });
 
