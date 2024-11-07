@@ -8,7 +8,7 @@
 //#include <131128\131128.cpp>
 //#include <155652\155652.cpp>
 //#include <72410\72410.cpp>
-
+#include <43163\source.cpp>
 
 template <typename Func, typename... Args>
 auto measureTime(Func&& func, Args&&... args) {
@@ -34,7 +34,8 @@ auto measureTime(Func&& func, Args&&... args) {
 
 int main()
 {
-    auto res1 = measureTime(solution1, "ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@ASDf!@");
-   
+    auto res1 = measureTime(solution_DFS, std::string("hit"), std::string("Cog"), vector<string>({ "hot", "dot", "dog", "lot", "log", "cog" }));
+    auto res2 = measureTime(solution_BFS, std::string("hit"), std::string("Cog"), vector<string>({ "hot", "dot", "dog", "lot", "log", "cog" }));
+
     std::cout << res1 << "\n" << res2 << std::endl;
 }
