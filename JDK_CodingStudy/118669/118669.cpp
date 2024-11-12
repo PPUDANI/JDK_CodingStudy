@@ -4,107 +4,98 @@
 
 using namespace std;
 
-#define NODE_MAX 99999
-#define COST_MAX 9999999
+#define INF 99999999
+
 vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector<int> summits)
 {
-    int NumOfSummit = int(summits.size());
     vector<vector<pair<int, int>>> Graph(n + 1);
-    for (vector<int> path : paths)
-    {
-        int NodeA = path[0];
-        int NodeB = path[1];
-        int Cost = path[2];
 
-        Graph[NodeA].push_back({ Cost, NodeB });
-        Graph[NodeB].push_back({ Cost, NodeA });
+    for (vector<int> Path : paths)
+    {
+        int From = Path[0];
+        int To = Path[1];
+        int Rest = Path[2];
+
+        Graph[From].push_back({ Rest, To });
     }
 
-    //                  Cost Node
-    priority_queue<pair<int, int>> PQ;
-    vector<int> CostToNode(n + 1);
+    vector<int> MinRestToNode(n + 1, INF);
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> PQ;
 
+    vector<bool> GateCheck(n + 1, false);
     for (int GateNode : gates)
     {
+        GateCheck[GateNode] = true;
         PQ.push({ 0, GateNode });
-        CostToNode[GateNode] = 0;
+    }
+
+    vector<bool> SummitCheck(n + 1, false);
+    for (int SummitNode : summits)
+    {
+        SummitCheck[SummitNode] = true;
     }
 
     while (!PQ.empty())
     {
-        int CurNode = PQ.top().first;
-        int CurCost = PQ.top().second;
-
+        int CurNode = PQ.top().second;
+        int CurRest = PQ.top().first;
         PQ.pop();
 
-        bool IsSummit = false;
-        for (int i = 0; i < NumOfSummit; ++i)
-        {
-            if (summits[i] == CurNode)
-            {
-                if (CostToNode[CurNode] > CurCost)
-                {
-                    IsSummit = true;
-                    CostToNode[CurNode] = CurCost;
-                    break;
-                }
-            }
-        }
-
-        if (IsSummit == true)
+        if (SummitCheck[CurNode] == true)
         {
             continue;
         }
 
-        for (pair<int, int> Edge : Graph[CurNode])
+        if (MinRestToNode[CurNode] < CurRest)
         {
-            int NextNode = Edge.first;
-            int NextCost = Edge.second;
+            continue;
+        }
 
-            bool IsGate = false;
-            for (int GateNode : gates)
+        for (pair<int, int> Next : Graph[CurNode])
+        {
+            int NextNode = Next.second;
+            if (GateCheck[NextNode] == true)
             {
-                if (NextNode == GateNode)
-                {
-                    IsGate = true;
-                    break;
-                }
+                continue;
             }
 
-            if (IsGate == false)
+            int NewRest = max(CurRest, Next.first);
+            if (MinRestToNode[NextNode] > NewRest)
             {
-                int MaxCost = max(CurCost, NextCost);
-                if (CostToNode[NextCost] > MaxCost)
-                {
-                    CostToNode[NextCost] = MaxCost;
-                    PQ.push({ MaxCost, NextNode });
-                }
+                MinRestToNode[NextNode] = NewRest;
+                PQ.push({ NewRest, NextNode });
             }
         }
     }
 
-    vector<int> answer = { NODE_MAX, COST_MAX };
-
-    for (int SummitNode : summits)
+    vector<int> answer = { INF, INF };
+    for (int Summit : summits)
     {
-        if (answer[1] > CostToNode[SummitNode])
+        if (MinRestToNode[Summit] < answer[1])
         {
-            answer[1] = CostToNode[SummitNode];
-            answer[0] = CostToNode[SummitNode];
+            answer[1] = MinRestToNode[Summit];
+            answer[0] = Summit;
         }
-        else if (answer[1] == CostToNode[SummitNode])
+        else if (MinRestToNode[Summit] == answer[1])
         {
-            answer[0] = min(answer[0], SummitNode);
+            answer[0] = min(answer[0], Summit);
         }
     }
 
     return answer;
 }
-
-
 int main()
 {
-    vector<int> res = solution(7,
+    vector<int> res1 = solution(7,
+    { { 1, 4, 4 },
+    { 1, 6, 1 },
+    { 1, 7, 3 },
+    { 2, 5, 2 },
+    { 3, 7, 4 },
+    { 5, 6, 6 }
+        }, { 1 }, {2, 3, 4});
+
+    vector<int> res2 = solution(7,
         { {1, 2, 5},
         {1, 4, 1},
         { 2, 3, 1 },
@@ -114,4 +105,5 @@ int main()
         {6, 7, 1} },
         { 3, 7 },
         { 1, 5 });
+
 }
